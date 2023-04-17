@@ -1,0 +1,29 @@
+# Go binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Go test and coverage files
+*.test
+*.out
+*.cover
+*.prof
+
+# Go generated files
+*.pb.go
+*_string.go
+
+# Go vendoring directories
+/vendor/
+/Godeps/
+
+# Other Go directories that may contain generated files
+/bin/
+/pkg/
+
+# Other Go files
+.idea/
+.vscode/
+*.iml
+.DS_Store

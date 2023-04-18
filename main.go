@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	ips, _ := vendors.GetFreemium()
+	ips, _ := vendors.GetProxyScan()
 	fmt.Println(ips)
 	workingProxies := []vendors.ProxyConfig{}
 	for _, proxy := range ips {
@@ -19,7 +19,7 @@ func main() {
 			workingProxies = append(workingProxies, proxy)
 			fmt.Printf("proxy %s:%d is working!\n", proxy.IP, proxy.Port)
 		} else {
-			fmt.Printf("failed to connect to proxy %s:%d\n", proxy.IP, proxy.Port)
+			// fmt.Printf("failed to connect to proxy %s:%d\n", proxy.IP, proxy.Port)
 		}
 	}
 
@@ -28,7 +28,6 @@ func main() {
 
 func ping(host string, port int, target string) bool {
 	address := fmt.Sprintf("%s//%s:%s", "http:", host, strconv.Itoa(port))
-	println(address)
 	proxyUrl, _ := url.Parse(address)
 	transport := &http.Transport{
 		Proxy: http.ProxyURL(proxyUrl),
@@ -44,7 +43,6 @@ func ping(host string, port int, target string) bool {
 	}
 	res, err := client.Get(target)
 	if err != nil {
-		fmt.Println("Error:", err)
 		return false
 	}
 	if res.StatusCode == http.StatusOK {

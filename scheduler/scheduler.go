@@ -14,18 +14,26 @@ import (
 )
 
 func RunJobs(cron *cron.Cron, memcache *cache.Cache) {
-	cron.AddFunc("* * * * *", func() {
-		ips, _ := vendors.GetProxyScrapeFreemium()
-		workingProxies := []vendors.ProxyConfig{}
-		for _, proxy := range ips {
-			if ping(proxy.IP, proxy.Port, "https://www.google.com/") {
-				workingProxies = append(workingProxies, proxy)
-				fmt.Printf("proxy %s:%d is working!\n", proxy.IP, proxy.Port)
-			} else {
-				// fmt.Printf("failed to connect to proxy %s:%d\n", proxy.IP, proxy.Port)
-			}
-		}
+	go pingAndSave(memcache)
+	cron.AddFunc("@every 3m", func() {
+		fmt.Println("Run")
+		pingAndSave(memcache)
 	})
+}
+
+func pingAndSave(memcache *cache.Cache) {
+	ips, _ := vendors.GetProxyScrapeFreemium()
+	workingProxies := []vendors.ProxyConfig{}
+	fmt.Println(len(ips))
+	for _, proxy := range ips {
+		if ping(proxy.IP, proxy.Port, "https://www.google.com/") {
+			workingProxies = append(workingProxies, proxy)
+			memcache.Set("proxies", workingProxies, cache.NoExpiration)
+			fmt.Printf("proxy %s:%d is working!\n", proxy.IP, proxy.Port)
+		} else {
+			// fmt.Printf("failed to connect to proxy %s:%d\n", proxy.IP, proxy.Port)
+		}
+	}
 }
 
 func ping(host string, port int, target string) bool {

@@ -15,8 +15,8 @@ import (
 
 func RunJobs(cron *cron.Cron, memcache *cache.Cache) {
 	go pingAndSave(memcache)
-	cron.AddFunc("@every 3m", func() {
-		fmt.Println("Run")
+	cron.AddFunc("@every 5m", func() {
+		memcache.Flush()
 		pingAndSave(memcache)
 	})
 }
@@ -24,7 +24,6 @@ func RunJobs(cron *cron.Cron, memcache *cache.Cache) {
 func pingAndSave(memcache *cache.Cache) {
 	ips, _ := vendors.GetProxyScrapeFreemium()
 	workingProxies := []vendors.ProxyConfig{}
-	fmt.Println(len(ips))
 	for _, proxy := range ips {
 		if ping(proxy.IP, proxy.Port, "https://www.google.com/") {
 			workingProxies = append(workingProxies, proxy)

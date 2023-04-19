@@ -8,7 +8,7 @@ import (
 )
 
 func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
-	res, err := http.Get("https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=all&ssl=all&anonymity=all")
+	res, err := http.Get("https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=us,de,fr,aus,gb&ssl=all&anonymity=all")
 	if err != nil {
 		return nil, err
 	}

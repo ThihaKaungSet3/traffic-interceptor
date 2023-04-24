@@ -25,7 +25,7 @@ func pingAndSave(memcache *cache.Cache) {
 	ips, _ := vendors.GetProxyScrapeFreemium()
 	workingProxies := []vendors.ProxyConfig{}
 	for _, proxy := range ips {
-		if ping(proxy.IP, proxy.Port, "https://www.google.com/") {
+		if ping(proxy.IP, proxy.Port, "https://httpbin.org/ip") {
 			workingProxies = append(workingProxies, proxy)
 			memcache.Set("proxies", workingProxies, cache.NoExpiration)
 			fmt.Printf("proxy %s:%d is working!\n", proxy.IP, proxy.Port)

@@ -35,7 +35,7 @@ func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 		config := ProxyConfig{
 			IP:   ipAddress,
 			Port: port,
-			Code: country.Code,
+			Code: country.Name,
 		}
 		available = append(available, config)
 	}

@@ -15,7 +15,7 @@ import (
 
 func RunJobs(cron *cron.Cron, memcache *cache.Cache) {
 	go pingAndSave(memcache)
-	cron.AddFunc("@every 5m", func() {
+	cron.AddFunc("@every 2m", func() {
 		memcache.Flush()
 		pingAndSave(memcache)
 	})

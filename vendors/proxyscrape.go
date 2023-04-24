@@ -44,10 +44,8 @@ func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 
 func GetRandomCountry() country {
 	countries := []country{
-		{Name: "America", Code: "us,ca,ua"},
-		{Name: "Middle East", Code: "ir,in,iq"},
-		{Name: "South America", Code: "mx,es,pa,co"},
-		{Name: "Europe", Code: "no,nl,cz,jp"},
+		{Name: "America", Code: "us,ca"},
+		{Name: "Europe", Code: "cz,es"},
 	}
 	rand.Seed(time.Now().UnixNano())
 	randomIndex := rand.Intn(len(countries))

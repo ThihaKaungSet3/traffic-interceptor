@@ -10,7 +10,7 @@ import (
 )
 
 func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
-	country := getRandomCountry()
+	country := GetRandomCountry()
 	url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=" + country.Code + "&ssl=all&anonymity=all"
 	res, err := http.Get(url)
 	if err != nil {
@@ -42,14 +42,14 @@ func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 	return available, nil
 }
 
-func getRandomCountry() country {
-	rand.Seed(time.Now().UnixNano())
+func GetRandomCountry() country {
 	countries := []country{
 		{Name: "US", Code: "us"},
 		{Name: "Canada", Code: "ca"},
 		{Name: "Iran", Code: "ir"},
 		{Name: "Norway,Netherland,Czech,Japan", Code: "no,nl,cz,jp"},
 	}
+	rand.Seed(time.Now().UnixNano())
 	randomIndex := rand.Intn(len(countries))
 	return countries[randomIndex]
 }

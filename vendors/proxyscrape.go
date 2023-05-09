@@ -11,7 +11,8 @@ import (
 
 func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 	country := GetRandomCountry()
-	url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=" + country.Code + "&ssl=all&anonymity=all"
+	// url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=" + country.Code + "&ssl=all&anonymity=all"
+	url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=no&ssl=all&anonymity=all"
 	res, err := http.Get(url)
 	if err != nil {
 		return nil, err

@@ -11,8 +11,8 @@ import (
 
 func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 	country := GetRandomCountry()
-	// url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=" + country.Code + "&ssl=all&anonymity=all"
-	url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=no&ssl=all&anonymity=all"
+	url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=" + country.Code + "&ssl=all&anonymity=all"
+	// url := "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=1000&country=no&ssl=all&anonymity=all"
 	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 func GetRandomCountry() country {
 	countries := []country{
 		// us,ca,cz,nl
-		{Name: "America", Code: "us,ca,cz,nl"},
+		{Name: "Globle", Code: "us,ca,cz,nl,gb,sg,ir"},
 		// {Name: "Europe", Code: "cz,nl"},
 	}
 	rand.Seed(time.Now().UnixNano())

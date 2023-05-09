@@ -46,7 +46,7 @@ func GetProxyScrapeFreemium() ([]ProxyConfig, error) {
 func GetRandomCountry() country {
 	countries := []country{
 		// us,ca,cz,nl
-		{Name: "America", Code: "us"},
+		{Name: "America", Code: "us,ca,cz,nl"},
 		// {Name: "Europe", Code: "cz,nl"},
 	}
 	rand.Seed(time.Now().UnixNano())
